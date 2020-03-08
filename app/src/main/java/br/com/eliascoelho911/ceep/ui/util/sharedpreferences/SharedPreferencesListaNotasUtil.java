@@ -1,20 +1,13 @@
 package br.com.eliascoelho911.ceep.ui.util.sharedpreferences;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 
-public class SharedPreferencesListaNotasUtil {
-    private SharedPreferences preferenciasDoUsuario;
-    private SharedPreferences.Editor editarPreferenciasDoUsuario;
-    private static final String CHAVE_USER_PREFERENCES = "user_preferences";
-    private static final String CHAVE_LAYOUT_LISTA_NOTAS = "layout_lista_notas";
+public class SharedPreferencesListaNotasUtil extends SharedPreferencesUtil{
     private int codigoDoLayout;
+    private static final String CHAVE_LAYOUT_LISTA_NOTAS = "layout_lista_notas";
 
-    @SuppressLint("CommitPrefEdits")
     public SharedPreferencesListaNotasUtil(Context context) {
-        preferenciasDoUsuario = context.getSharedPreferences(CHAVE_USER_PREFERENCES, Context.MODE_PRIVATE);
-        editarPreferenciasDoUsuario = preferenciasDoUsuario.edit();
+        super(context);
         codigoDoLayout = preferenciasDoUsuario.getInt(CHAVE_LAYOUT_LISTA_NOTAS,
                 LayoutsListaNotas.getCodigo("layoutInvalido"));
     }
