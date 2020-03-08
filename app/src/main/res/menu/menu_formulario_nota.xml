@@ -4,6 +4,6 @@
 
     <item android:id="@+id/menu_formulario_salvar"
         android:title="@string/salvar_nota"
-        android:icon="@drawable/ic_done_salvar_nota_24dp"
+        android:icon="@drawable/ic_done_salvar_nota"
         app:showAsAction="always"/>
 </menu>

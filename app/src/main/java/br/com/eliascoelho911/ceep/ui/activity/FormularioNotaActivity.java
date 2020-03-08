@@ -1,6 +1,7 @@
 package br.com.eliascoelho911.ceep.ui.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,8 +10,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import br.com.eliascoelho911.ceep.R;
 import br.com.eliascoelho911.ceep.model.Nota;
+import br.com.eliascoelho911.ceep.ui.recyclerView.adapter.PaletaDeCoresAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,6 +31,10 @@ public class FormularioNotaActivity extends AppCompatActivity {
     EditText titulo;
     @BindView(R.id.formulario_nota_descricao)
     EditText descricao;
+    @BindView(R.id.formulario_nota_paleta_de_cores)
+    RecyclerView paletaDeCores;
+    @BindView(R.id.formulario_nota_layout)
+    ConstraintLayout layout;
     private int posicaoRecebida = POSICAO_NAO_ENCONTRADA;
 
     @Override
@@ -38,12 +46,15 @@ public class FormularioNotaActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        configuraPaletaDeCores();
+
         Intent dadosRecebidos = getIntent();
         if (dadosRecebidos.hasExtra(CHAVE_NOTA)) {
             setTitle(TITULO_APPBAR_ALTERAR);
             Nota notaRecebida = (Nota) dadosRecebidos.getSerializableExtra(CHAVE_NOTA);
             if (notaRecebida != null) {
                 preencheCampos(notaRecebida);
+                alteraCorDeFundo(notaRecebida.getCorDeFundo());
                 posicaoRecebida = dadosRecebidos.getIntExtra(CHAVE_POSICAO, POSICAO_NAO_ENCONTRADA);
             } else {
                 Toast.makeText(this, ERRO_ALTERAR_NOTA, Toast.LENGTH_SHORT).show();
@@ -54,7 +65,8 @@ public class FormularioNotaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_formulario_salvar) {
-            Nota notaCriada = new Nota(titulo.getText().toString(), descricao.getText().toString());
+            Nota notaCriada = new Nota(titulo.getText().toString(), descricao.getText().toString(),
+                    pegaCorDeFundo());
             retorna(notaCriada);
             finish();
         }
@@ -67,11 +79,25 @@ public class FormularioNotaActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    private void configuraPaletaDeCores() {
+        PaletaDeCoresAdapter paletaDeCoresAdapter = new PaletaDeCoresAdapter(FormularioNotaActivity.this);
+        paletaDeCoresAdapter.setOnItemClickListener(this::alteraCorDeFundo);
+        paletaDeCores.setAdapter(paletaDeCoresAdapter);
+    }
+
+    private void alteraCorDeFundo(int cor) {
+        layout.setBackgroundColor(cor);
+    }
+
     private void retorna(Nota nota) {
         Intent retornaNota = new Intent();
         retornaNota.putExtra(CHAVE_NOTA, nota);
-        retornaNota.putExtra("posicao", posicaoRecebida);
+        retornaNota.putExtra(CHAVE_POSICAO, posicaoRecebida);
         setResult(AppCompatActivity.RESULT_OK, retornaNota);
+    }
+
+    private int pegaCorDeFundo() {
+        return ((ColorDrawable) layout.getBackground()).getColor();
     }
 
     private void preencheCampos(Nota nota) {

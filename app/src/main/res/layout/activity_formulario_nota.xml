@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/formulario_nota_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,16 +26,32 @@
         android:id="@+id/formulario_nota_descricao"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:hint="@string/descricao"
         android:gravity="top"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="@string/descricao"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@id/formulario_nota_paleta_de_cores"
         app:layout_constraintEnd_toEndOf="@id/formulario_nota_titulo"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/formulario_nota_titulo"
         app:layout_constraintTop_toBottomOf="@id/formulario_nota_titulo"
-        tools:ignore="TextFields"
-        android:importantForAutofill="no" />
+        tools:ignore="TextFields" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/formulario_nota_paleta_de_cores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/fundoPaletaDeCor"
+        tools:listitem="@layout/item_paleta_de_cor"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/formulario_nota_descricao"
+        app:layout_constraintVertical_bias="1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

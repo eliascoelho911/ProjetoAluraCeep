@@ -2,11 +2,15 @@ package br.com.eliascoelho911.ceep.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +19,8 @@ import br.com.eliascoelho911.ceep.dao.NotaDAO;
 import br.com.eliascoelho911.ceep.model.Nota;
 import br.com.eliascoelho911.ceep.ui.recyclerView.adapter.ListaNotasAdapter;
 import br.com.eliascoelho911.ceep.ui.recyclerView.helper.callback.NotaItemTouchHelperCallBack;
+import br.com.eliascoelho911.ceep.ui.util.layoutManager.LayoutManagerListaNotasUtil;
+import br.com.eliascoelho911.ceep.ui.util.sharedpreferences.SharedPreferencesListaNotasUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,12 +33,14 @@ import static br.com.eliascoelho911.ceep.ConstantesNotas.POSICAO_NAO_ENCONTRADA;
 import static br.com.eliascoelho911.ceep.MensagensToast.ERRO_ALTERAR_NOTA;
 
 public class ListaNotasActivity extends AppCompatActivity {
-
     public static final String TITULO_APPBAR = "Notas";
-    @BindView(R.id.lista_notas_recycleView)
-    RecyclerView listaNotas;
+    @BindView(R.id.lista_notas_recycleView) RecyclerView listaNotas;
     private final NotaDAO dao = new NotaDAO();
     private ListaNotasAdapter adapter;
+    private MenuItem botaoAlterarParaGrade;
+    private MenuItem botaoAlterarParaLista;
+    private SharedPreferencesListaNotasUtil preferenciaDoUsuarioLayout;
+    private LayoutManagerListaNotasUtil layoutManagerListaNotasUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,39 @@ public class ListaNotasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_notas);
         setTitle(TITULO_APPBAR);
         ButterKnife.bind(this);
+        insereNotasDeTeste();
         configuraListaDeNotas(dao.todos());
+
+        configuraPreferenciasDoUsuario();
+        configuraListaNotasLayoutManagerUtil();
+        if (preferenciaDoUsuarioLayout.naoEncontrouConfiguracaoDeLayoutInicial()) {
+            preferenciaDoUsuarioLayout.configuraLinearLayoutComoLayoutInicial();
+        }
+        if (preferenciaDoUsuarioLayout.linearLayoutEhInicial()) {
+            layoutManagerListaNotasUtil.colocaListaComoLinearLayout();
+        } else if (preferenciaDoUsuarioLayout.staggeredGridLayoutEhInicial()) {
+            layoutManagerListaNotasUtil.colocaListaComoStaggeredGridLayout();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista_notas, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (menuClicadoEhAlterarParaLista(item)) {
+            alteraIconeParaGrade();
+            layoutManagerListaNotasUtil.colocaListaComoLinearLayout();
+            preferenciaDoUsuarioLayout.configuraLinearLayoutComoLayoutInicial();
+        } else if (menuClicadoForAlterarParaGrade(item)) {
+            alteraIconeParaLinear();
+            layoutManagerListaNotasUtil.colocaListaComoStaggeredGridLayout();
+            preferenciaDoUsuarioLayout.configuraStaggeredGridLayoutComoInicial();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -69,6 +109,17 @@ public class ListaNotasActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        buscaBotoesDoMenu(menu);
+        if (preferenciaDoUsuarioLayout.linearLayoutEhInicial()) {
+            alteraIconeParaGrade();
+        } else if (preferenciaDoUsuarioLayout.staggeredGridLayoutEhInicial()) {
+            alteraIconeParaLinear();
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     @OnClick(R.id.lista_notas_insere_nota)
     void vaiParaFormularioNotaParaInserir() {
         Intent vaiParaFormularioNotaActivity = new Intent(ListaNotasActivity.this,
@@ -76,11 +127,48 @@ public class ListaNotasActivity extends AppCompatActivity {
         startActivityForResult(vaiParaFormularioNotaActivity, CODIGO_PEDE_NOTA);
     }
 
+    private void buscaBotoesDoMenu(Menu menu) {
+        botaoAlterarParaGrade = menu.findItem(R.id.menu_lista_notas_alterar_para_grade);
+        botaoAlterarParaLista = menu.findItem(R.id.menu_lista_notas_alterar_para_lista);
+    }
+
+    private void configuraPreferenciasDoUsuario() {
+        preferenciaDoUsuarioLayout = new SharedPreferencesListaNotasUtil(this);
+    }
+
+    private void insereNotasDeTeste() {
+        for (int i = 1; i < 10; i++) {
+            dao.insere(new Nota("Titulo " + i, "Descrição "+ i, Color.WHITE));
+        }
+    }
+
+    private boolean menuClicadoForAlterarParaGrade(@NonNull MenuItem item) {
+        return item.getItemId() == R.id.menu_lista_notas_alterar_para_grade;
+    }
+
+    private void alteraIconeParaLinear() {
+        botaoAlterarParaGrade.setVisible(false);
+        botaoAlterarParaLista.setVisible(true);
+    }
+
+    private void alteraIconeParaGrade() {
+        botaoAlterarParaGrade.setVisible(true);
+        botaoAlterarParaLista.setVisible(false);
+    }
+
+    private boolean menuClicadoEhAlterarParaLista(@NonNull MenuItem item) {
+        return item.getItemId() == R.id.menu_lista_notas_alterar_para_lista;
+    }
+
     private void configuraListaDeNotas(List<Nota> notas) {
         adapter = new ListaNotasAdapter(this, notas);
         listaNotas.setAdapter(adapter);
         adapter.setOnItemClickListener(this::vaiParaFormularioNotaParaAlterar);
         configuraNotaItemTouchHelper();
+    }
+
+    private void configuraListaNotasLayoutManagerUtil() {
+        layoutManagerListaNotasUtil = new LayoutManagerListaNotasUtil(this, listaNotas);
     }
 
     private void configuraNotaItemTouchHelper() {

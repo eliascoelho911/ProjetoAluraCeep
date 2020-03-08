@@ -10,10 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.eliascoelho911.ceep.R;
 import br.com.eliascoelho911.ceep.model.Nota;
-import br.com.eliascoelho911.ceep.ui.recyclerView.adapter.listener.OnItemClickListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -80,6 +80,8 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         TextView titulo;
         @BindView(R.id.item_nota_descricao)
         TextView descricao;
+        @BindView(R.id.cardView)
+        CardView cardView;
         private Nota nota;
 
         private NotaViewHolder(@NonNull View itemView) {
@@ -90,12 +92,21 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
 
         private void vincula(Nota nota) {
             preencheCampos(nota);
+            ajustaCorDeFundo(nota);
             this.nota = nota;
+        }
+
+        private void ajustaCorDeFundo(Nota nota) {
+            cardView.setCardBackgroundColor(nota.getCorDeFundo());
         }
 
         private void preencheCampos(Nota nota) {
             titulo.setText(nota.getTitulo());
             descricao.setText(nota.getDescricao());
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Nota nota, int posicao);
     }
 }

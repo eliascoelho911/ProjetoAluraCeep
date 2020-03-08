@@ -4,4 +4,6 @@
     <string name="descricao">Descrição</string>
     <string name="inserir_uma_nota">Inserir uma nota</string>
     <string name="salvar_nota">Salvar Nota</string>
+    <string name="alterar_para_grade">Alterar para grade</string>
+    <string name="alterar_para_lista">Alterar para lista</string>
 </resources>
