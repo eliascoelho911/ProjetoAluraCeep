@@ -2,7 +2,6 @@ package br.com.eliascoelho911.ceep.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -137,9 +136,8 @@ public class ListaNotasActivity extends AppCompatActivity {
     }
 
     private void insereNotasDeTeste() {
-        for (int i = 1; i < 10; i++) {
-            dao.insere(new Nota("Titulo " + i, "Descrição "+ i, Color.WHITE));
-        }
+        dao.insere(new Nota("Lista de compras", "Pão\nMostarda\nPresunto"));
+        dao.insere(new Nota("Comprar novo jogo de video-game", ""));
     }
 
     private boolean menuClicadoForAlterarParaGrade(@NonNull MenuItem item) {

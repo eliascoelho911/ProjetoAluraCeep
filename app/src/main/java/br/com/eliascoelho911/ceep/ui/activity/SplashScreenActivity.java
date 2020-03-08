@@ -37,5 +37,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         Intent vaiParaListaNotasActivity = new Intent(SplashScreenActivity.this,
                 ListaNotasActivity.class);
         startActivity(vaiParaListaNotasActivity);
+        finish();
     }
 }
