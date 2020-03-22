@@ -1,4 +1,4 @@
-package br.com.eliascoelho911.ceep.ui.util.layoutManager;
+package br.com.eliascoelho911.ceep.util.layoutManager;
 
 import android.content.Context;
 

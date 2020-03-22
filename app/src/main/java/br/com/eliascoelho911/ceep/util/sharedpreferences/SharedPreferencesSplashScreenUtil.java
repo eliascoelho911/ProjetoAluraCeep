@@ -1,10 +1,10 @@
-package br.com.eliascoelho911.ceep.ui.util.sharedpreferences;
+package br.com.eliascoelho911.ceep.util.sharedpreferences;
 
 import android.content.Context;
 
 public class SharedPreferencesSplashScreenUtil extends SharedPreferencesUtil {
 
-    public static final String CHAVE_APP_JA_FOI_ABERTO = "appJaFoiAberto";
+    private static final String CHAVE_APP_JA_FOI_ABERTO = "appJaFoiAberto";
 
     public SharedPreferencesSplashScreenUtil(Context context) {
         super(context);

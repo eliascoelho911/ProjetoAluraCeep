@@ -1,4 +1,4 @@
-package br.com.eliascoelho911.ceep.ui.util.sharedpreferences;
+package br.com.eliascoelho911.ceep.util.sharedpreferences;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

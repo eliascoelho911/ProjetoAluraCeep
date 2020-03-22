@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 import br.com.eliascoelho911.ceep.R;
-import br.com.eliascoelho911.ceep.ui.util.sharedpreferences.SharedPreferencesSplashScreenUtil;
+import br.com.eliascoelho911.ceep.util.sharedpreferences.SharedPreferencesSplashScreenUtil;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
