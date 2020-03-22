@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 abstract class SharedPreferencesUtil {
-    SharedPreferences preferenciasDoUsuario;
-    SharedPreferences.Editor editarPreferenciasDoUsuario;
+    final SharedPreferences preferenciasDoUsuario;
+    final SharedPreferences.Editor editarPreferenciasDoUsuario;
     private static final String CHAVE_USER_PREFERENCES = "user_preferences";
 
     @SuppressLint("CommitPrefEdits")

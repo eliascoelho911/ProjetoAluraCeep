@@ -30,7 +30,7 @@ public class FeedbackActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean clicouParaEnviar(@NonNull MenuItem item) {
+    private boolean clicouParaEnviar(@NonNull MenuItem item) {
         return item.getItemId() == R.id.menu_feedback_enviar;
     }
 }

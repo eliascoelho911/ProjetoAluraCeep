@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.NotaViewHolder> {
     private final Context context;
-    private List<Nota> notas = new ArrayList<>();
+    private final List<Nota> notas = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public ListaNotasAdapter(Context context) {

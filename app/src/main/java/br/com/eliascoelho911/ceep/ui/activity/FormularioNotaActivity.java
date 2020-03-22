@@ -30,7 +30,7 @@ import static br.com.eliascoelho911.ceep.MensagensToast.INSERINDO_NOTA;
 
 public class FormularioNotaActivity extends AppCompatActivity {
 
-    public static final String TITULO_APPBAR_INSERIR = "Inserir nota";
+    private static final String TITULO_APPBAR_INSERIR = "Inserir nota";
     private static final String TITULO_APPBAR_ALTERAR = "Alterar nota";
     @BindView(R.id.formulario_nota_titulo)
     EditText titulo;
@@ -91,7 +91,7 @@ public class FormularioNotaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean validaCampos() {
+    private boolean validaCampos() {
         return !titulo.getText().toString().isEmpty() ||
                 !descricao.getText().toString().isEmpty();
     }

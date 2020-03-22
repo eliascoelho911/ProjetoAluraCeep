@@ -18,8 +18,8 @@ import static br.com.eliascoelho911.ceep.MensagensToast.ERRO_MOVER_NOTA;
 
 public class NotaItemTouchHelperCallBack extends ItemTouchHelper.Callback {
     private final ListaNotasAdapter adapter;
-    private RoomNotaDAO notaDAO;
-    private Context context;
+    private final RoomNotaDAO notaDAO;
+    private final Context context;
 
     public NotaItemTouchHelperCallBack(ListaNotasAdapter adapter, Context context) {
         this.adapter = adapter;

@@ -90,7 +90,7 @@ public class PaletaDeCoresAdapter extends RecyclerView.Adapter<PaletaDeCoresAdap
         CINZA("#D2D4DC"), MARROM("#A47C48"),
         ROXO("#BE29EC");
 
-        private int codigoHexadecimal;
+        private final int codigoHexadecimal;
 
         CoresDaPaleta(String codigoHexadecimal) {
             this.codigoHexadecimal = Color.parseColor(codigoHexadecimal);

@@ -25,7 +25,7 @@ import butterknife.OnClick;
 import static br.com.eliascoelho911.ceep.ConstantesNotas.CHAVE_NOTA;
 
 public class ListaNotasActivity extends AppCompatActivity {
-    public static final String TITULO_APPBAR = "Notas";
+    private static final String TITULO_APPBAR = "Notas";
     @BindView(R.id.lista_notas_recycleView)
     RecyclerView listaNotas;
     private RoomNotaDAO notaDAO;
@@ -92,7 +92,7 @@ public class ListaNotasActivity extends AppCompatActivity {
         return item.getItemId() == R.id.menu_lista_notas_feedback;
     }
 
-    public void vaiParaFeedbackActivity() {
+    private void vaiParaFeedbackActivity() {
         Intent vaiParaFeedback = new Intent(this, FeedbackActivity.class);
         startActivity(vaiParaFeedback);
     }
