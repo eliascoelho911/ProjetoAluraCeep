@@ -6,4 +6,11 @@
     <string name="salvar_nota">Salvar Nota</string>
     <string name="alterar_para_grade">Alterar para grade</string>
     <string name="alterar_para_lista">Alterar para lista</string>
+    <string name="feedback">Feedback</string>
+    <string name="deixe_o_seu_feedback">Deixe o seu feedback! :)</string>
+    <string name="email">E-mail</string>
+    <string name="escreva_seu_feedback">Escreva seu feedback</string>
+    <string name="mensagem_feedback">Envie dúvidas ou sugestões sobre sua experiência com o Ceep. Usaremos as informações fornecidas para aprimorar a experiência da App.</string>
+    <string name="enviar">Enviar</string>
+    <string name="banner">Banner</string>
 </resources>

@@ -9,15 +9,15 @@ public class SharedPreferencesListaNotasUtil extends SharedPreferencesUtil{
     public SharedPreferencesListaNotasUtil(Context context) {
         super(context);
         codigoDoLayout = preferenciasDoUsuario.getInt(CHAVE_LAYOUT_LISTA_NOTAS,
-                LayoutsListaNotas.getCodigo("layoutInvalido"));
+                LayoutsListaNotas.LINEAR_LAYOUT.codigo);
     }
 
     public boolean linearLayoutEhInicial() {
-        return codigoDoLayout == LayoutsListaNotas.getCodigo("linear");
+        return codigoDoLayout == LayoutsListaNotas.LINEAR_LAYOUT.codigo;
     }
 
     public boolean staggeredGridLayoutEhInicial() {
-        return codigoDoLayout == LayoutsListaNotas.getCodigo("staggeredGrid");
+        return codigoDoLayout == LayoutsListaNotas.STAGGERED_GRID_LAYOUT.codigo;
     }
 
     public boolean naoEncontrouConfiguracaoDeLayoutInicial() {
@@ -25,12 +25,12 @@ public class SharedPreferencesListaNotasUtil extends SharedPreferencesUtil{
     }
 
     public void configuraLinearLayoutComoLayoutInicial() {
-        editarPreferenciasDoUsuario.putInt(CHAVE_LAYOUT_LISTA_NOTAS, LayoutsListaNotas.getCodigo("linear"));
+        editarPreferenciasDoUsuario.putInt(CHAVE_LAYOUT_LISTA_NOTAS, LayoutsListaNotas.LINEAR_LAYOUT.codigo);
         editarPreferenciasDoUsuario.commit();
     }
 
     public void configuraStaggeredGridLayoutComoInicial() {
-        editarPreferenciasDoUsuario.putInt(CHAVE_LAYOUT_LISTA_NOTAS, LayoutsListaNotas.getCodigo("staggeredGrid"));
+        editarPreferenciasDoUsuario.putInt(CHAVE_LAYOUT_LISTA_NOTAS, LayoutsListaNotas.STAGGERED_GRID_LAYOUT.codigo);
         editarPreferenciasDoUsuario.commit();
     }
 

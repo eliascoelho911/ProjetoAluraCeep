@@ -82,8 +82,19 @@ public class ListaNotasActivity extends AppCompatActivity {
             alteraIconeParaLinear();
             layoutManagerListaNotasUtil.colocaListaComoStaggeredGridLayout();
             preferenciaDoUsuarioLayout.configuraStaggeredGridLayoutComoInicial();
+        } else if (menuClicadoEhFeedback(item)) {
+            vaiParaFeedbackActivity();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean menuClicadoEhFeedback(MenuItem item) {
+        return item.getItemId() == R.id.menu_lista_notas_feedback;
+    }
+
+    public void vaiParaFeedbackActivity() {
+        Intent vaiParaFeedback = new Intent(this, FeedbackActivity.class);
+        startActivity(vaiParaFeedback);
     }
 
     @Override

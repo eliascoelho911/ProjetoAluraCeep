@@ -2,14 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<item android:id="@+id/menu_lista_notas_alterar_para_grade"
-    android:title="@string/alterar_para_grade"
-    app:showAsAction="always"
-    android:icon="@drawable/ic_grid_layout"
-    android:visible="true"/>
-<item android:id="@+id/menu_lista_notas_alterar_para_lista"
-    android:title="@string/alterar_para_lista"
-    app:showAsAction="always"
-    android:icon="@drawable/ic_linear_layout"
-    android:visible="false"/>
+    <item
+        android:id="@+id/menu_lista_notas_alterar_para_grade"
+        android:icon="@drawable/ic_grid_layout"
+        android:title="@string/alterar_para_grade"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_lista_notas_alterar_para_lista"
+        android:icon="@drawable/ic_linear_layout"
+        android:title="@string/alterar_para_lista"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_lista_notas_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/feedback"
+        android:visible="true"
+        app:showAsAction="always" />
 </menu>

@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.activity.SplashScreenActivity"
+        <activity android:name=".ui.activity.FeedbackActivity" />
+        <activity
+            android:name=".ui.activity.SplashScreenActivity"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.FormularioNotaActivity"/>
-        <activity android:name=".ui.activity.ListaNotasActivity"/>
+        <activity android:name=".ui.activity.FormularioNotaActivity" />
+        <activity android:name=".ui.activity.ListaNotasActivity" />
     </application>
 
 </manifest>
